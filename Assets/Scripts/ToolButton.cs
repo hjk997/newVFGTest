@@ -40,7 +40,8 @@ public class ToolButton : MonoBehaviour
     public GameObject sickleObject;
     public GameObject waterCanObject;
 
-    private Animator anim;
+    private Animator waterCanAnim;
+    private Animator sickleAnim;
 
     public Transform sickleTr;
 
@@ -58,7 +59,8 @@ public class ToolButton : MonoBehaviour
     void Start()
     {
         OBtnPublisher.Instance.onChange += DoSmt;
-        anim = waterCanObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
+        waterCanAnim = waterCanObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
+        sickleAnim = sickleObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         cropInfoPanel.SetActive(false);
     }
 
@@ -255,15 +257,16 @@ public class ToolButton : MonoBehaviour
 
                 case 3: // 낫
                     // 보고 있는 밭에 농작물이 있고 수확이 가능하다면 농작물 수확
-                    Debug.Log(target.GetChild(0).name);
-                    crop_child = target.transform.Find(target.GetChild(0).name).gameObject;
-
-                    Destroy(crop_child);
+                    //Debug.Log(target.GetChild(0).name);
+                   // crop_child = target.transform.Find(target.GetChild(0).name).gameObject;
+                    sickleAnim.SetTrigger("isOBtnPushed");
+                    //Destroy(crop_child);
                     break;
 
                 case 4: // 물뿌리개 
                     // 보고 있는 밭에 농작물이 있다면 물을 줌 
-                    anim.SetTrigger("isOBtnPushed");
+                    Debug.Log("pushed");
+                    waterCanAnim.SetTrigger("isOBtnPushed");
                     break;
 
                 default: // 아마... 호출될 일 없을것임 
