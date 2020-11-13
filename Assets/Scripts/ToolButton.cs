@@ -48,7 +48,7 @@ public class ToolButton : MonoBehaviour
     public int toolOpt = 1;
 
     private static string firstState = "선택 없음";
-    private static string secondState = "호미";
+    private static string secondState = "씨앗 심기";
     private static string thirdState = "낫";
     private static string fourthState = "물뿌리개";
     private string totalTag;
@@ -258,14 +258,13 @@ public class ToolButton : MonoBehaviour
                 case 3: // 낫
                     // 보고 있는 밭에 농작물이 있고 수확이 가능하다면 농작물 수확
                     //Debug.Log(target.GetChild(0).name);
-                   // crop_child = target.transform.Find(target.GetChild(0).name).gameObject;
+                    crop_child = target.transform.Find(target.GetChild(0).name).gameObject;
                     sickleAnim.SetTrigger("isOBtnPushed");
-                    //Destroy(crop_child);
+                    Destroy(crop_child);
                     break;
 
                 case 4: // 물뿌리개 
                     // 보고 있는 밭에 농작물이 있다면 물을 줌 
-                    Debug.Log("pushed");
                     waterCanAnim.SetTrigger("isOBtnPushed");
                     break;
 

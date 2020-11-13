@@ -15,13 +15,6 @@ public class BtnClick : MonoBehaviour
     public float speed = 20;
     public bool go, right, left;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
