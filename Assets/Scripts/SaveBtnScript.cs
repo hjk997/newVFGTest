@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Assets.Scripts;
+using Mono.Data.Sqlite;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,19 +17,21 @@ public class SaveBtnScript : MonoBehaviour
     GameObject farmChild;
     Transform cropsParents;
     GameObject crops;
-
     public Text SaveLogText;
     Transform prefab;
+    IDbCommand IDbCommand;
+    String sqlQuery;
 
     // Start is called before the first frame update
     // 게임이 시작되면 밭 모습 초기화 
     // 인벤토리 구현은 우선순위에 따라 계획 예정 
     void Start(){
 
+        IDbCommand = DBConnectionSingleton.getIDbCommand();
+
         // 밭 이름 미리 지정해둠 
         String[] ttag = { "farm1", "farm2", "farm3", "farm4", "farm5" };
         String tmpTag;
-        String tmpStr;
         String[] cropsKinds = { "none", "mushroom", "carrot" };
 
         // 밭을 모두 순회하며 저장되어있는 농작물 심어줌 
@@ -41,15 +46,18 @@ public class SaveBtnScript : MonoBehaviour
                 // 2. key string 만듦
                 tmpTag = t + i.ToString();
 
-                // 3. PlayerPrefs에서 저장된 값 가져옴 
-                tmpStr = PlayerPrefs.GetString(tmpTag);
+                // 3. PlayerPrefs에서 저장된 값 가져옴 > sqlite에서 가져옴
+                //tmpStr = PlayerPrefs.GetString(tmpTag);
+                sqlQuery = "SELECT ID FROM CROPS WHERE ID=(SELECT CROP_ID FROM FARM WHERE ID='"+ tmpTag +"')";
+                // view를 만들거나 join table을 생성하는 쪽이 더 시스템 부하가 덜할 것 같다. 
 
+                IDbCommand.CommandText = sqlQuery;
+                int Ttag = Convert.ToInt32(IDbCommand.ExecuteScalar());
+
+                Debug.Log(Ttag);
                 // 4. 해당 키 값이랑 일치하는 태그를 배열에서 찾아줌 
                 // 일치한다면 instantiate함 
-                if (tmpStr.Equals("none"))
-                {
-
-                }else if (tmpStr.Equals("mushroom"))
+                if (Ttag == cropsConstants.mushroom)
                 {
                     // 5. instantiate로 프리팹 추가 
                     crops = Instantiate(Resources.Load("Prefabs/Mushroom"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
@@ -67,7 +75,7 @@ public class SaveBtnScript : MonoBehaviour
                     // 9. 자식 프리팹에 태그 지정해줌 
                     crops.gameObject.tag = "mushroom";
                 }
-                else if (tmpStr.Equals("carrot"))
+                else if (Ttag == cropsConstants.carrot)
                 {
                     // 5. instantiate로 프리팹 추가 
                     crops = Instantiate(Resources.Load("Prefabs/Carrot_Fruit"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
@@ -115,18 +123,30 @@ public class SaveBtnScript : MonoBehaviour
                 tmpTag = t + i.ToString();
 
                 // 5. farmChild에 자식이 있는지 확인 
-                // 있으면 PlayerPrefs에 저장함 
+                // 있으면 PlayerPrefs에 저장함 > sqlite에 저장함 
                 if (farmChild.transform.childCount == 1)
                 {
                     // 5-1. 농작물 명, 심은 날짜로 저장해야 함 
-                    PlayerPrefs.SetString(tmpTag, farmChild.transform.GetChild(0).tag);
-                    PlayerPrefs.SetString(tmpTag + "date", DateTime.Now.ToString("yyyy-MM-dd"));
+                    // > 밭 번호에 대해 농작물 번호를 저장 
+                    // UPDATE FARM SET CROP_ID = (SELECT ID FROM CROPS WHERE NAME='farmChild.transform.GetChild(0).tag') WHERE ID=tmpTag;
+                    sqlQuery = "UPDATE FARM SET CROP_ID = (SELECT ID FROM CROPS WHERE NAME='"+farmChild.transform.GetChild(0).tag+"') WHERE ID='"+tmpTag+"';";
+
+                    IDbCommand.CommandText = sqlQuery;
+                    IDbCommand.ExecuteNonQuery();
+                    
+                    //PlayerPrefs.SetString(tmpTag, farmChild.transform.GetChild(0).tag);
+                    //PlayerPrefs.SetString(tmpTag + "date", DateTime.Now.ToString("yyyy-MM-dd"));
                 }
                 // 6. 자식이 없으면 저장된 값 없음을 저장함 
                 else
                 {
-                    PlayerPrefs.SetString(tmpTag, "none");
+                    sqlQuery = "UPDATE FARM SET CROP_ID = null WHERE ID='"+tmpTag+ "';";
+
+                    IDbCommand.CommandText = sqlQuery;
+                    IDbCommand.ExecuteNonQuery();
                 }
+
+
             }
 
         }

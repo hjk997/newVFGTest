@@ -1,9 +1,8 @@
 ﻿using System;
 using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Data;
 
 public class ToolButton : MonoBehaviour
 {
@@ -55,9 +54,13 @@ public class ToolButton : MonoBehaviour
 
     private bool detectTarget = false;
 
+    // database connection 객체 
+    IDbCommand IDbCommand;
+
     // Start is called before the first frame update
     void Start()
     {
+        IDbCommand = DBConnectionSingleton.getIDbCommand();
         OBtnPublisher.Instance.onChange += DoSmt;
         waterCanAnim = waterCanObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         sickleAnim = sickleObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
@@ -258,9 +261,21 @@ public class ToolButton : MonoBehaviour
                 case 3: // 낫
                     // 보고 있는 밭에 농작물이 있고 수확이 가능하다면 농작물 수확
                     //Debug.Log(target.GetChild(0).name);
-                    crop_child = target.transform.Find(target.GetChild(0).name).gameObject;
-                    sickleAnim.SetTrigger("isOBtnPushed");
-                    Destroy(crop_child);
+                    if(target.childCount == 1)
+                    {
+                        // 먼저 인벤토리에 농작물 저장 
+                        crop_child = target.transform.Find(target.GetChild(0).name).gameObject;
+                        String tagName = crop_child.gameObject.tag;
+
+                        // 가져온 태그명으로 농작물 이름 검색해서 inventory에 추가함 
+                        String sqlQuery = "UPDATE INVENTORY SET LEFT_NUM=LEFT_NUM+1 WHERE ITEM_NAME='"+ tagName +"'";
+                        IDbCommand.CommandText = sqlQuery;
+                        IDbCommand.ExecuteNonQuery();
+
+                        sickleAnim.SetTrigger("isOBtnPushed");
+                        Destroy(crop_child);
+                    }
+                    
                     break;
 
                 case 4: // 물뿌리개 

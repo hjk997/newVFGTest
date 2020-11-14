@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Materials\ExportMap\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
     <Compile Include="Assets\Scripts\BtnClick.cs" />
+    <Compile Include="Assets\Scripts\DBConnectionSingleton.cs" />
     <Compile Include="Assets\Scripts\LampLight.cs" />
     <Compile Include="Assets\Scripts\MenuBtnHandler.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
@@ -74,7 +75,9 @@
     <Compile Include="Assets\Scripts\SaveBtnScript.cs" />
     <Compile Include="Assets\Scripts\SunLight.cs" />
     <Compile Include="Assets\Scripts\ToolButton.cs" />
-    <Compile Include="Assets\Scripts\dbScript.cs" />
+    <Compile Include="Assets\Scripts\cropsConstants.cs" />
+    <Compile Include="Assets\Scripts\itemDetails.cs" />
+    <Compile Include="Assets\Scripts\scrollViewController.cs" />
     <None Include="Assets\Materials\ExportMap\Cartoon_Farm_Crops\README.txt" />
     <None Include="Assets\Materials\ExportMap\QS\QS-Textures-Grass-v1\Documentation\Readme.txt" />
     <None Include="Assets\Materials\ExportMap\Five Seamless Tileable Ground Textures\read me.txt" />

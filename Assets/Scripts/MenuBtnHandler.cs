@@ -30,4 +30,11 @@ public class MenuBtnHandler : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void closeBtnClicked()
+    {
+        // 패널 활성화 
+        // 패널 활성화된 후 바깥 터치하면 종료 
+        menuPanel.SetActive(false);
+    }
 }
