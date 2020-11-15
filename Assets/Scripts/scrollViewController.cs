@@ -16,7 +16,7 @@ namespace Assets.Scripts
 
         List<List<itemDetails>> listData;
         
-        public void Start()
+        public void Awake()
         {
             listData = new List<List<itemDetails>>();
             for(int i = 0; i < 5; i++)
@@ -56,11 +56,13 @@ namespace Assets.Scripts
 
             reader.Close();
 
+            // 리스트에 모든 목록 출력 
             foreach (var pair in listData)
             {
                 foreach (var element in pair)
                 {
                     Text[] newText;
+                    Image image;
 
                     string name = element.ItemName;
                     string leftNum = element.LeftNum;
@@ -70,12 +72,15 @@ namespace Assets.Scripts
                     GameObject card = Instantiate(Resources.Load("Prefabs/inventoryList")) as GameObject;
                     card.name = name + type;
 
-                    if (type.Equals(1)) // 농작물
+                    image = card.GetComponentsInChildren<Image>()[0];
+                    image.sprite = Resources.Load<Sprite>("Image/"+name);
+
+                    if (type.Equals("1")) // 농작물
                     {
                         name = "이름 : " + name + "(농작물)";
 
                     }
-                    else if (type.Equals(5))// 씨앗
+                    else if (type.Equals("5"))// 씨앗
                     {
                         name = "이름 : " + name + "(씨앗)";
                     }
@@ -110,26 +115,26 @@ namespace Assets.Scripts
         { // code = 1
 
             printScrollView(1);
+
         }
 
         public void foodPrint()
         { // code = 2
 
             printScrollView(2);
-
         }
 
         public void toolPrint()
-        { // code = 4
+        { // code = 3, 4
 
             printScrollView(4);
-
         }
 
         public void seedPrint()
         { // code = 5
 
             printScrollView(5);
+
         }
 
 
@@ -141,27 +146,24 @@ namespace Assets.Scripts
                 foreach (var element in pair)
                 {
                     string tTag = element.ItemName + element.Type;
-                    Debug.Log(tTag);
+                    //Debug.Log(tTag);
 
-                    GameObject card = scrollRect.transform.GetChild(1).transform.GetChild(1).transform.Find(tTag).gameObject;
+                    // scrollView에서 태그 이름을 기반으로 객체를 하나씩 읽어온다. 
+                    GameObject card = scrollRect.transform.Find("Scrollbar Vertical").transform.Find("Content").transform.Find(tTag).gameObject;
 
-                    if (element.Type == exceptCode)
+                    if ( (exceptCode == -1) || (element.Type == exceptCode) )
                     {
-                        Debug.Log("foreach: " + card.name);
+                        //Debug.Log("foreach: " + card.name);
                         //visible 상태로 전환
                         card.SetActive(true);
-                    }
-                    else
+                    } 
+                    else 
                     {
                         //invisible 상태로 전환 
                         card.SetActive(false);
                     }
-                    
-                    
                 }
             }
-                    
-
         }
 }
 }

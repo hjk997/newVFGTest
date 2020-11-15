@@ -15,12 +15,16 @@ public class SaveBtnScript : MonoBehaviour
 {
     GameObject farm;
     GameObject farmChild;
-    Transform cropsParents;
     GameObject crops;
-    public Text SaveLogText;
+
+    Transform cropsParents;
     Transform prefab;
+
     IDbCommand IDbCommand;
+
     String sqlQuery;
+
+    public Text SaveLogText;
 
     // Start is called before the first frame update
     // 게임이 시작되면 밭 모습 초기화 
@@ -54,7 +58,7 @@ public class SaveBtnScript : MonoBehaviour
                 IDbCommand.CommandText = sqlQuery;
                 int Ttag = Convert.ToInt32(IDbCommand.ExecuteScalar());
 
-                Debug.Log(Ttag);
+                //Debug.Log(Ttag);
                 // 4. 해당 키 값이랑 일치하는 태그를 배열에서 찾아줌 
                 // 일치한다면 instantiate함 
                 if (Ttag == cropsConstants.mushroom)

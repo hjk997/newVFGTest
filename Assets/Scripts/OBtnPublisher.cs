@@ -5,6 +5,10 @@ namespace Assets.Scripts
 {
     public class OBtnPublisher : MonoBehaviour
     {
+
+        public delegate void ChangeState();
+        public event ChangeState onChange;
+
         private static OBtnPublisher _instance;
         public static OBtnPublisher Instance
         {
@@ -17,9 +21,6 @@ namespace Assets.Scripts
                 return _instance;
             }
         }
-
-        public delegate void ChangeState();
-        public event ChangeState onChange;
 
         // Update is called once per frame
         public void PushOBtn()

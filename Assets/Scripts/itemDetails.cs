@@ -7,6 +7,7 @@ public class itemDetails : MonoBehaviour
 {
     string itemName;
     string leftNum;
+    string description;
     int type;
 
     public itemDetails(string name, string leftNum, int type)
@@ -21,4 +22,6 @@ public class itemDetails : MonoBehaviour
     public string LeftNum { get => leftNum; set => leftNum = value; }
 
     public int Type { get => type; set => type = value; }
+
+    public string Description { get => description; set => description = value; }
 }
