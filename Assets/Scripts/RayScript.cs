@@ -59,4 +59,10 @@ public class RayScript : MonoBehaviour
             isShopClicked = !isShopClicked;
         }
     }
+
+    public void exitBtnClicked()
+    {
+        isShopClicked = false;
+        shopPanel.SetActive(false);
+    }
 }

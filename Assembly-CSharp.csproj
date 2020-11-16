@@ -70,11 +70,11 @@
     <Compile Include="Assets\Scripts\DateCheckCoroutine.cs" />
     <Compile Include="Assets\Scripts\LampLight.cs" />
     <Compile Include="Assets\Scripts\MenuBtnHandler.cs" />
-    <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\OBtnPublisher.cs" />
     <Compile Include="Assets\Scripts\QuitScript.cs" />
     <Compile Include="Assets\Scripts\RayScript.cs" />
     <Compile Include="Assets\Scripts\SaveBtnScript.cs" />
+    <Compile Include="Assets\Scripts\ShopController.cs" />
     <Compile Include="Assets\Scripts\SunLight.cs" />
     <Compile Include="Assets\Scripts\ToolButton.cs" />
     <Compile Include="Assets\Scripts\cropsConstants.cs" />

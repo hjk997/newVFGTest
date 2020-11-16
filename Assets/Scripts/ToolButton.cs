@@ -77,6 +77,7 @@ public class ToolButton : MonoBehaviour
                 toolTxt.text = firstState;
                 toolInfoTxt.text = " ";
 
+                cropInfoPanel.SetActive(false);
                 waterCanObject.SetActive(false);
                 sickleObject.SetActive(false);
                 sphere_obj.SetActive(false);
@@ -118,6 +119,7 @@ public class ToolButton : MonoBehaviour
 
             default:
                 toolInfoTxt.text = "";
+                cropInfoPanel.SetActive(false);
                 waterCanObject.SetActive(false);
                 sickleObject.SetActive(false);
                 sphere_obj.SetActive(false);
@@ -151,7 +153,7 @@ public class ToolButton : MonoBehaviour
 
             // 이때... 농작물이 있다면 농작물의 상세 정보를 띄워줌 
 
-            // 1. 농작물이 있는지 확인하기 위해... PlayerPrefs에 일치하는 태그 값을 가져옴 
+            // 1. 농작물이 있는지 확인하기 위해... 밭 위치와 일치하는 태그 값을 가져옴 
             string tag = target.transform.parent.tag;
 
             // 2. 태그값과 target의 순번을 조합해서 PlayerPrefs에서 자료를 찾음 
