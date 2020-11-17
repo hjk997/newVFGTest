@@ -1,27 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class itemDetails : MonoBehaviour
+namespace Assets.Scripts
 {
-    string itemName;
-    string leftNum;
-    string description;
-    int type;
-
-    public itemDetails(string name, string leftNum, int type)
+    public class itemDetails : MonoBehaviour
     {
-        this.itemName = name;
-        this.leftNum = leftNum;
-        this.type = type;
+        string itemName;
+        string leftNum;
+        string description;
+        int type;
+
+        public itemDetails(string name, string leftNum, int type)
+        {
+            this.itemName = name;
+            this.leftNum = leftNum;
+            this.type = type;
+        }
+
+        public string ItemName
+        {
+            get => itemName;
+            set => itemName = value;
+        }
+
+        public string LeftNum
+        {
+            get => leftNum;
+            set => leftNum = value;
+        }
+
+        public int Type
+        {
+            get => type;
+            set => type = value;
+        }
+
+        public string Description
+        {
+            get => description;
+            set => description = value;
+        }
     }
-
-    public string ItemName { get => itemName; set => itemName = value; }
-
-    public string LeftNum { get => leftNum; set => leftNum = value; }
-
-    public int Type { get => type; set => type = value; }
-
-    public string Description { get => description; set => description = value; }
 }
