@@ -1,44 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
-public class MenuBtnHandler : MonoBehaviour
+namespace Assets.Scripts
 {
-    public GameObject menuPanel;
-
-    public void MenuBtnClicked()
+    public class MenuBtnHandler : MonoBehaviour
     {
-        // 패널 활성화 
-        // 패널 활성화된 후 바깥 터치하면 종료 
-        menuPanel.SetActive(true);
-    }
+        public GameObject menuPanel;
 
-    public void InvenBtnClicked()
-    {
-        menuPanel.SetActive(false);
+        public void MenuBtnClicked()
+        {
+            // 패널 활성화 
+            // 패널 활성화된 후 바깥 터치하면 종료 
+            menuPanel.SetActive(true);
+        }
 
-        // 플레이어의 마지막 위치 저장 
+        public void InvenBtnClicked()
+        {
+            menuPanel.SetActive(false);
 
-        SceneManager.LoadScene("InventoryScene");
+            // 플레이어의 마지막 위치 저장 
 
-    }
+            SceneManager.LoadScene("InventoryScene");
+        }
 
-    public void backBtnClicked()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
+        public void backBtnClicked()
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
 
-    public void exitBtnClicked()
-    {
-        Application.Quit();
-    }
+        public void exitBtnClicked()
+        {
+            Application.Quit();
+        }
 
-    public void closeBtnClicked()
-    {
-        // 패널 비활성화 
-        // 패널 활성화된 후 버튼 터치하면 종료 
-        menuPanel.SetActive(false);
+        public void closeBtnClicked()
+        {
+            // 패널 비활성화 
+            // 패널 활성화된 후 버튼 터치하면 종료 
+            menuPanel.SetActive(false);
+        }
     }
 }
