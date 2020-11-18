@@ -15,6 +15,8 @@ namespace Assets.Scripts
         // Start is called before the first frame update
         void Start()
         {
+            OBtnPublisher.Instance.onChange += DoSmt;
+
             defaultPanel.SetActive(true);
             shopPanel.SetActive(false);
         }
