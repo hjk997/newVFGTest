@@ -37,17 +37,19 @@ namespace Assets.Scripts
 
             while (reader.Read())
             {
-                string name = reader.GetString(0);
-                int type = reader.GetInt32(1);
-                string leftNum = Convert.ToString(reader.GetInt32(2));
+                itemDetails element = this.gameObject.AddComponent<itemDetails>();
+
+                element.ItemName = reader.GetString(0);
+                element.Type = reader.GetInt32(1);
+                element.LeftNum = Convert.ToString(reader.GetInt32(2));
 
                 if (name.Equals("coin"))
                 {
-                    coinText.text = "보유 코인: " + leftNum;
+                    coinText.text = "보유 코인: " + element.LeftNum;
                 }
                 else
                 {
-                    listData[type - 1].Add(new itemDetails(name, leftNum, type));
+                    listData[element.Type - 1].Add(element);
                 }
             }
 
@@ -94,7 +96,7 @@ namespace Assets.Scripts
 
                     newText[1].text = leftNum;
 
-                    card.transform.SetParent(scrollRect.transform.GetChild(1).transform.GetChild(1).transform);
+                    card.transform.SetParent(scrollRect.transform.GetChild(0).transform.GetChild(0).transform);
                     card.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
 
@@ -146,7 +148,7 @@ namespace Assets.Scripts
                     //Debug.Log(tTag);
 
                     // scrollView에서 태그 이름을 기반으로 객체를 하나씩 읽어온다. 
-                    GameObject card = scrollRect.transform.Find("Scrollbar Vertical").transform.Find("Content").transform.Find(tTag).gameObject;
+                    GameObject card = scrollRect.transform.Find("Viewport").transform.Find("Content").transform.Find(tTag).gameObject;
 
                     if ( (exceptCode == -1) || (element.Type == exceptCode) )
                     {

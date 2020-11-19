@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\cropsConstants.cs" />
     <Compile Include="Assets\Scripts\itemDetails.cs" />
     <Compile Include="Assets\Scripts\scrollViewController.cs" />
+    <Compile Include="Assets\Scripts\shopHandler.cs" />
     <None Include="Assets\Materials\ExportMap\Cartoon_Farm_Crops\README.txt" />
     <None Include="Assets\Materials\ExportMap\QS\QS-Textures-Grass-v1\Documentation\Readme.txt" />
     <None Include="Assets\Materials\ExportMap\Five Seamless Tileable Ground Textures\read me.txt" />

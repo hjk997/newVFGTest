@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Data;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -7,8 +10,8 @@ namespace Assets.Scripts
         Ray ray;
         RaycastHit hit;
 
-        public GameObject shopPanel;
-        public GameObject defaultPanel;
+        public GameObject shopScript;
+        shopHandler shopHandler;
 
         bool isShopSelected = false;
 
@@ -16,9 +19,7 @@ namespace Assets.Scripts
         void Start()
         {
             OBtnPublisher.Instance.onChange += DoSmt;
-
-            defaultPanel.SetActive(true);
-            shopPanel.SetActive(false);
+            shopHandler = shopScript.GetComponent<shopHandler>();
         }
 
         // Update is called once per frame
@@ -46,15 +47,14 @@ namespace Assets.Scripts
         {
             if (isShopSelected)
             {
-                defaultPanel.SetActive(false);
-                shopPanel.SetActive(true);
+                // shopHandler 부르기
+                shopHandler.showBuyPanel();
             }
         }
 
         public void exitBtnClicked()
         {
-            defaultPanel.SetActive(true);
-            shopPanel.SetActive(false);
+            shopHandler.closePanel();
         }
     }
 }

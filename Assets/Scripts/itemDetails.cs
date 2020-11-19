@@ -8,6 +8,7 @@ namespace Assets.Scripts
         string leftNum;
         string description;
         int type;
+        int id;
 
         public itemDetails(string name, string leftNum, int type)
         {
@@ -33,6 +34,8 @@ namespace Assets.Scripts
             get => type;
             set => type = value;
         }
+
+        public int Id { get => id; set => id = value; }
 
         public string Description
         {
