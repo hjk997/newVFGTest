@@ -47,6 +47,7 @@ namespace Assets.Scripts
         {
             if (isShopSelected)
             {
+                // Music : 시장 방문 
                 // shopHandler 부르기
                 shopHandler.showBuyPanel();
             }

@@ -23,10 +23,12 @@ namespace Assets.Scripts
             // 2. 현재 시 값을 바탕으로 현재 태양의 위치 획득하기 
             if (5 < hour)
             {
+                // Music: 낮
                 rot = (hour - 6) * 15;
             }
             else if (hour < 6)
             {
+                // Music: 밤 
                 rot = (hour + 18) * 15;
             }
 

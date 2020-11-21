@@ -12,11 +12,11 @@ namespace Assets.Scripts
         public Text coinText;
 
         List<List<itemDetails>> listData;
-        
+
         public void Awake()
         {
             listData = new List<List<itemDetails>>();
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 listData.Add(new List<itemDetails>());
             }
@@ -32,7 +32,6 @@ namespace Assets.Scripts
             // db에서 전체 목록을 불러온다. 
             string sqlQuery = "SELECT ITEM_NAME, ITEM_TYPE, LEFT_NUM FROM INVENTORY WHERE LEFT_NUM!=0;";
             DbCommand.CommandText = sqlQuery;
-            //SqliteDataReader reader = DbCommand.ExecuteReader();
             var reader = DbCommand.ExecuteReader();
 
             while (reader.Read())
@@ -43,7 +42,7 @@ namespace Assets.Scripts
                 element.Type = reader.GetInt32(1);
                 element.LeftNum = Convert.ToString(reader.GetInt32(2));
 
-                if (name.Equals("coin"))
+                if (element.ItemName.Equals("coin"))
                 {
                     coinText.text = "보유 코인: " + element.LeftNum;
                 }
@@ -72,7 +71,7 @@ namespace Assets.Scripts
                     card.name = name + type;
 
                     image = card.GetComponentsInChildren<Image>()[0];
-                    image.sprite = Resources.Load<Sprite>("Image/"+name);
+                    image.sprite = Resources.Load<Sprite>("Image/" + name);
 
                     if (type.Equals("1")) // 농작물
                     {
@@ -150,13 +149,13 @@ namespace Assets.Scripts
                     // scrollView에서 태그 이름을 기반으로 객체를 하나씩 읽어온다. 
                     GameObject card = scrollRect.transform.Find("Viewport").transform.Find("Content").transform.Find(tTag).gameObject;
 
-                    if ( (exceptCode == -1) || (element.Type == exceptCode) )
+                    if ((exceptCode == -1) || (element.Type == exceptCode))
                     {
                         //Debug.Log("foreach: " + card.name);
                         //visible 상태로 전환
                         card.SetActive(true);
-                    } 
-                    else 
+                    }
+                    else
                     {
                         //invisible 상태로 전환 
                         card.SetActive(false);
@@ -164,5 +163,5 @@ namespace Assets.Scripts
                 }
             }
         }
-}
+    }
 }

@@ -24,11 +24,11 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            //Debug.Log(sunLight.GetComponent<Transform>().rotation.eulerAngles.x);
             if (sunLight.GetComponent<Transform>().rotation.eulerAngles.x > 250)
             {
                 if (!ps.IsAlive())
                 {
+                    // Music: 토치 켜기 
                     ps.Play();
                     lampLight.enabled = !lampLight.enabled;
                 }
@@ -37,6 +37,7 @@ namespace Assets.Scripts
             {
                 if (ps.IsAlive())
                 {
+                    // Music: 토치 끄기 (위에랑 똑같은 소리라도 괜찮아요) 
                     ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                     lampLight.enabled = !lampLight.enabled;
                 }

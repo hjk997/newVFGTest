@@ -34,7 +34,6 @@ namespace Assets.Scripts
             // 밭 이름 미리 지정해둠 
             String[] ttag = {"farm1", "farm2", "farm3", "farm4", "farm5"};
             String tmpTag;
-            String[] cropsKinds = {"none", "mushroom", "carrot"};
 
             // 밭을 모두 순회하며 저장되어있는 농작물 심어줌 
             foreach (String t in ttag)
@@ -81,7 +80,7 @@ namespace Assets.Scripts
                     else if (Ttag == cropsConstants.carrot)
                     {
                         // 5. instantiate로 프리팹 추가 
-                        crops = Instantiate(Resources.Load("Prefabs/Carrot_Fruit"), new Vector3(0, 0, 0),
+                        crops = Instantiate(Resources.Load("Prefabs/carrot_1"), new Vector3(0, 0, 0),
                             Quaternion.identity) as GameObject;
 
                         // 6. 추가한 프리팹의 부모 GameObject를 찾아줌 
@@ -97,58 +96,28 @@ namespace Assets.Scripts
                         // 9. 자식 프리팹에 태그 지정해줌 
                         crops.gameObject.tag = "carrot";
                     }
-                }
-            }
-        }
-
-        //저장 버튼을 눌렀을 때 
-        public void SaveBtnClicked()
-        {
-            // 밭 이름 미리 지정해둠 
-            String[] ttag = {"farm1", "farm2", "farm3", "farm4", "farm5"};
-            String tmpTag;
-
-            // 밭을 모두 순회하며 저장되어있는 농작물 심어줌 
-            foreach (String t in ttag)
-            {
-                // 1. 이름이 같은 밭의 GameObject 가져옴 
-                farm = GameObject.Find(t);
-
-                // 2. for문 돌림 
-                for (int i = 0; i < 16; i++)
-                {
-                    // 3. 자식에 하나씩 접근함 (Cylinder이거나 dirt_pile임) 
-                    farmChild = farm.transform.GetChild(i).gameObject;
-
-                    // 4. 임의의 태그명... 만들어줌 
-                    tmpTag = t + i.ToString();
-
-                    // 5. farmChild에 자식이 있는지 확인 
-                    // 있으면 PlayerPrefs에 저장함 > sqlite에 저장함 
-                    if (farmChild.transform.childCount == 1)
+                    else if (Ttag == cropsConstants.onion)
                     {
-                        // 5-1. 농작물 명, 심은 날짜로 저장해야 함 
-                        // > 밭 번호에 대해 농작물 번호를 저장 
-                        // UPDATE FARM SET CROP_ID = (SELECT ID FROM CROPS WHERE NAME='farmChild.transform.GetChild(0).tag') WHERE ID=tmpTag;
-                        sqlQuery = "UPDATE FARM SET CROP_ID = (SELECT ID FROM CROPS WHERE NAME='" +
-                                   farmChild.transform.GetChild(0).tag + "') WHERE ID='" + tmpTag + "';";
+                        // 5. instantiate로 프리팹 추가 
+                        crops = Instantiate(Resources.Load("Prefabs/onion_1"), new Vector3(0, 0, 0),
+                            Quaternion.identity) as GameObject;
 
-                        IDbCommand.CommandText = sqlQuery;
-                        IDbCommand.ExecuteNonQuery();
+                        // 6. 추가한 프리팹의 부모 GameObject를 찾아줌 
+                        cropsParents = farm.transform.GetChild(i).gameObject.GetComponent<Transform>();
 
-                        //PlayerPrefs.SetString(tmpTag, farmChild.transform.GetChild(0).tag);
-                        //PlayerPrefs.SetString(tmpTag + "date", DateTime.Now.ToString("yyyy-MM-dd"));
-                    }
-                    // 6. 자식이 없으면 저장된 값 없음을 저장함 
-                    else
-                    {
-                        sqlQuery = "UPDATE FARM SET CROP_ID = null WHERE ID='" + tmpTag + "';";
+                        // 7. 부모 아래에 자식으로 넣어줌 
+                        crops.transform.parent = cropsParents;
 
-                        IDbCommand.CommandText = sqlQuery;
-                        IDbCommand.ExecuteNonQuery();
+                        // 8. 문제가 생겨서.... local 단위로 크기를 다시 맞춰줌 
+                        crops.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+                        crops.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+                        // 9. 자식 프리팹에 태그 지정해줌 
+                        crops.gameObject.tag = "onion";
                     }
                 }
             }
         }
+
     }
 }

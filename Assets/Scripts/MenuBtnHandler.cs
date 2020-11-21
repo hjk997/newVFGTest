@@ -20,12 +20,14 @@ namespace Assets.Scripts
 
             // 플레이어의 마지막 위치 저장 
 
-            SceneManager.LoadScene("InventoryScene");
+            LoadingSceneManager.LoadScene("InventoryScene");
+            //SceneManager.LoadScene("InventoryScene");
         }
 
         public void backBtnClicked()
         {
-            SceneManager.LoadScene("SampleScene");
+            LoadingSceneManager.LoadScene("SampleScene");
+            //SceneManager.LoadScene("SampleScene");
         }
 
         public void exitBtnClicked()

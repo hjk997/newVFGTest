@@ -63,17 +63,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\JoyStick.cs" />
     <Compile Include="Assets\Materials\ExportMap\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
-    <Compile Include="Assets\Scripts\BtnClick.cs" />
     <Compile Include="Assets\Scripts\DBConnectionSingleton.cs" />
     <Compile Include="Assets\Scripts\DateChanger.cs" />
     <Compile Include="Assets\Scripts\DateCheckCoroutine.cs" />
     <Compile Include="Assets\Scripts\LampLight.cs" />
+    <Compile Include="Assets\Scripts\LoadingSceneManager.cs" />
+    <Compile Include="Assets\Scripts\MainLoading.cs" />
     <Compile Include="Assets\Scripts\MenuBtnHandler.cs" />
     <Compile Include="Assets\Scripts\OBtnPublisher.cs" />
     <Compile Include="Assets\Scripts\QuitScript.cs" />
     <Compile Include="Assets\Scripts\RayScript.cs" />
     <Compile Include="Assets\Scripts\SaveBtnScript.cs" />
+    <Compile Include="Assets\Scripts\SeedDetails.cs" />
     <Compile Include="Assets\Scripts\ShopController.cs" />
     <Compile Include="Assets\Scripts\SunLight.cs" />
     <Compile Include="Assets\Scripts\ToolButton.cs" />
