@@ -29,8 +29,8 @@ namespace Assets.Scripts
         private float dist;
         private float min = 4000.0f;
 
-        // 버튼에 생기는 도구 이름 
-        public Text toolTxt;
+        // 버튼에 생기는 도구 이미지 
+        Sprite[] toolImage;
 
         // 도구가 바뀔 때 상단에 뜨는 안내문 txt 
         public Text toolInfoTxt;
@@ -38,6 +38,9 @@ namespace Assets.Scripts
         public GameObject sickleObject;
         public GameObject waterCanObject;
         public GameObject changeSeedBtn;
+        public GameObject toolBtn;
+
+        private AudioClip harvestBgm;
 
         private Animator waterCanAnim;
         private Animator sickleAnim;
@@ -47,10 +50,7 @@ namespace Assets.Scripts
         private int toolOpt = 1;
         private int seedOpt = 0;
 
-        private static string firstState = "선택 없음";
-        private static string secondState = "씨앗 심기";
-        private static string thirdState = "낫";
-        private static string fourthState = "물뿌리개";
+        private static string[] state = { "btnChange", "seed", "sickleBtn", "wateringCanBtn"};
         private string totalTag = "farm1345";
 
         private bool detectTarget = false;
@@ -70,6 +70,14 @@ namespace Assets.Scripts
             sickleAnim = sickleObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
             cropInfoPanel.SetActive(false);
 
+            // 이미지 초기화
+            toolImage = new Sprite[4];
+
+            for(int i = 0; i < state.Length; i++)
+            {
+                toolImage[i] = Resources.Load<Sprite>("Image/" + state[i]);
+            }
+            
             // 인벤토리에 있는 씨앗 목록을 불러온다. 
             string sqlQuery = "SELECT ITEM_NAME, LEFT_NUM FROM INVENTORY WHERE LEFT_NUM!=0 AND ITEM_TYPE=5;";
             dbCommand.CommandText = sqlQuery;
@@ -92,6 +100,9 @@ namespace Assets.Scripts
             }
 
             showSeedChangeBtnImage();
+
+            harvestBgm = Resources.Load("Sound/harvest", typeof(AudioClip)) as AudioClip;
+            AudioManager.Inst.AddToPlaylist(harvestBgm);
         }
 
         // Update is called once per frame
@@ -101,7 +112,6 @@ namespace Assets.Scripts
             {
                 /* 선택 없음 */
                 case 1:
-                    toolTxt.text = firstState;
                     toolInfoTxt.text = " ";
 
                     cropInfoPanel.SetActive(false);
@@ -113,7 +123,7 @@ namespace Assets.Scripts
                     break;
                 /* 호미 */
                 case 2:
-                    toolTxt.text = secondState;
+                    //toolTxt.text = secondState;
                     toolInfoTxt.text = "<b>빨간 동그라미가 뜰 때까지 농작물에 가까이 다가가세요.</b>";
 
                     waterCanObject.SetActive(false);
@@ -127,7 +137,7 @@ namespace Assets.Scripts
                     break;
                 /* 낫 */
                 case 3:
-                    toolTxt.text = thirdState;
+                    //toolTxt.text = thirdState;
                     toolInfoTxt.text = "<b>빨간 동그라미가 뜰 때까지 농작물에 가까이 다가가세요.</b>";
 
                     changeSeedBtn.SetActive(false);
@@ -139,7 +149,7 @@ namespace Assets.Scripts
 
                 /* 물뿌리개 */
                 case 4:
-                    toolTxt.text = fourthState;
+                    //toolTxt.text = fourthState;
                     toolInfoTxt.text = "<b>빨간 동그라미가 뜰 때까지 농작물에 가까이 다가가세요.</b>";
                     waterCanObject.SetActive(true);
                     sickleObject.SetActive(false);
@@ -167,6 +177,7 @@ namespace Assets.Scripts
             {
                 toolOpt = 1;
             }
+            toolBtn.GetComponent<Image>().sprite = toolImage[toolOpt - 1];
         }
 
         public void showSeedChangeBtnImage()
@@ -189,8 +200,6 @@ namespace Assets.Scripts
 
             seedOpt++;
 
-
-            Debug.Log("seed: " + seedOpt);
             if (seedList.Count <= seedOpt)
             {
                 seedOpt = 0;
@@ -290,7 +299,6 @@ namespace Assets.Scripts
                 while (reader.Read())
                 {
 
-                    Debug.Log(reader.GetString(0));
                     // if문을 통해 검사함 > 농작물이 없다면 정보창 표시 안 함 
                     if (reader.GetString(0).Equals("none"))
                     {
@@ -348,11 +356,6 @@ namespace Assets.Scripts
 
                             // Music : 도구 사용?
 
-                            // 무슨 씨앗 심는건지 가져오기 
-                            //string sqlQuery = "SELECT CROP_NAME FROM CROPS WHERE NAME ='" + cropNameLocal + "';";
-                            //dbCommand.CommandText = sqlQuery;
-                            //var reader = dbCommand.ExecuteReader();
-
 
                             crop_child = Instantiate(Resources.Load("Prefabs/" + cropNameLocal  + "_1"), new Vector3(0, 0, 0),
                                 Quaternion.identity) as GameObject;
@@ -365,6 +368,7 @@ namespace Assets.Scripts
                             crop_child.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
                             // 자식 프리팹에 태그 지정해줌 
+                            crop_child.gameObject.name = totalTag;
                             crop_child.gameObject.tag = cropNameLocal;
 
                             // 쿼리문 작성 후 execute
@@ -393,6 +397,7 @@ namespace Assets.Scripts
                     case 3: // 낫
 
                         // Music : 도구 사용 & 농작물 사용 
+                        AudioManager.Inst.PlaySFX(harvestBgm, new Vector2(0f, 0f), 1);
 
                         // 보고 있는 밭에 농작물이 있고 수확이 가능하다면 농작물 수확
                         //Debug.Log(target.GetChild(0).name);
@@ -445,7 +450,7 @@ namespace Assets.Scripts
                             // 해당 농작물에 대한 IS_WATERED_TODAY 값을 1로 하고 오늘 날짜를 LAST_WATERED_DATE 값으로 한다. 
                             string sqlQuery = "UPDATE FARM SET IS_WATERED_TODAY=1, " +
                                 "LAST_WATERED_DATE='" + DateTime.Now.ToString("yyyy-MM-dd") +
-                                "' WHERE ID='" + tagNameWaterCan + "' AND IS_WATERED_TODAY=0;";
+                                "' WHERE ID='" + totalTag + "' AND IS_WATERED_TODAY=0;";
 
                             dbCommand.CommandText = sqlQuery;
                             dbCommand.ExecuteNonQuery();

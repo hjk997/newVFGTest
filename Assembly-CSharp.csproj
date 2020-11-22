@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\JoyStick.cs" />
     <Compile Include="Assets\Materials\ExportMap\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\DBConnectionSingleton.cs" />
     <Compile Include="Assets\Scripts\DateChanger.cs" />
     <Compile Include="Assets\Scripts\DateCheckCoroutine.cs" />
