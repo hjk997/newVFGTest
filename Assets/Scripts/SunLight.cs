@@ -8,7 +8,6 @@ namespace Assets.Scripts
  **/
     public class SunLight : MonoBehaviour
     {
-
         float rot = 0.0004f;
 
         // Start is called before the first frame update
@@ -19,16 +18,20 @@ namespace Assets.Scripts
 
             // 1. 현재 시간 값 얻어오기 
             int hour = Int32.Parse(DateTime.Now.ToString("HH"));
-
+            AudioClip sunBgm = Resources.Load("Sound/day", typeof(AudioClip)) as AudioClip;
+            AudioClip nightBgm = Resources.Load("Sound/night", typeof(AudioClip)) as AudioClip;
+            
             // 2. 현재 시 값을 바탕으로 현재 태양의 위치 획득하기 
             if (5 < hour)
             {
                 // Music: 낮
+                AudioManager.Inst.PlayBGM(sunBgm, MusicTransition.Swift, 0, 1.0f);
                 rot = (hour - 6) * 15;
             }
             else if (hour < 6)
             {
                 // Music: 밤 
+                AudioManager.Inst.PlayBGM(nightBgm, MusicTransition.Swift, 0, 1.0f);
                 rot = (hour + 18) * 15;
             }
 
