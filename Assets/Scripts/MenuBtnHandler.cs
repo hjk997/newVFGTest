@@ -6,6 +6,7 @@ namespace Assets.Scripts
     public class MenuBtnHandler : MonoBehaviour
     {
         public GameObject menuPanel;
+        public GameObject developerInfoPanel;
         public GameObject player;
 
         public void MenuBtnClicked()
@@ -42,6 +43,17 @@ namespace Assets.Scripts
         public void exitBtnClicked()
         {
             Application.Quit();
+        }
+
+        public void developInfoBtnClicked()
+        {
+            menuPanel.SetActive(false);
+            developerInfoPanel.SetActive(true);
+        }
+
+        public void developInfoCloseBtnClicked()
+        {
+            developerInfoPanel.SetActive(false);
         }
 
         public void closeBtnClicked()

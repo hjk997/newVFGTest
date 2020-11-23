@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\LoadingSceneManager.cs" />
     <Compile Include="Assets\Scripts\MainLoading.cs" />
     <Compile Include="Assets\Scripts\MenuBtnHandler.cs" />
+    <Compile Include="Assets\Scripts\NewTestScript.cs" />
     <Compile Include="Assets\Scripts\OBtnPublisher.cs" />
     <Compile Include="Assets\Scripts\QuitScript.cs" />
     <Compile Include="Assets\Scripts\RayScript.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Assets\Scripts\SeedDetails.cs" />
     <Compile Include="Assets\Scripts\ShopController.cs" />
     <Compile Include="Assets\Scripts\SunLight.cs" />
+    <Compile Include="Assets\Scripts\TestScript.cs" />
     <Compile Include="Assets\Scripts\ToolButton.cs" />
     <Compile Include="Assets\Scripts\cropsConstants.cs" />
     <Compile Include="Assets\Scripts\itemDetails.cs" />
@@ -294,6 +296,9 @@
     </Reference>
     <Reference Include="System.Data">
       <HintPath>C:/Users/unsky/newscene/newVFGTest/Assets/Plugins/System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="mono.data.sqliteclient">
+      <HintPath>C:/Users/unsky/newscene/newVFGTest/Assets/Plugins/mono.data.sqliteclient.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

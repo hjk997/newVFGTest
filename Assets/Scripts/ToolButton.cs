@@ -361,7 +361,8 @@ namespace Assets.Scripts
                         {
 
                             // Music : 도구 사용?
-
+                            AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/tool"));
+                            // 무슨 씨앗 심는건지 가져오기 
 
                             crop_child = Instantiate(Resources.Load("Prefabs/" + cropNameLocal  + "_1"), new Vector3(0, 0, 0),
                                 Quaternion.identity) as GameObject;
@@ -403,7 +404,10 @@ namespace Assets.Scripts
                     case 3: // 낫
 
                         // Music : 도구 사용 & 농작물 사용 
-                        AudioManager.Inst.PlaySFX(harvestBgm, new Vector2(0f, 0f), 1);
+                        //AudioManager.Inst.PlaySFX(harvestBgm, new Vector2(0f, 0f), 1);
+
+                        AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/tool"));
+                        AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/harvest"));
 
                         // 보고 있는 밭에 농작물이 있고 수확이 가능하다면 농작물 수확
                         //Debug.Log(target.GetChild(0).name);
@@ -444,7 +448,7 @@ namespace Assets.Scripts
                     case 4: // 물뿌리개 
 
                         // Music : 도구 사용
-
+                        AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/tool"));
                         // 보고 있는 밭에 농작물이 있다면 물을 줌 
                         if (target.childCount == 1)
                         {

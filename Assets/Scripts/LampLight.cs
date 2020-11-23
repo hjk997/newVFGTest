@@ -29,6 +29,8 @@ namespace Assets.Scripts
                 if (!ps.IsAlive())
                 {
                     // Music: 토치 켜기 
+
+                    AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/torch"));
                     ps.Play();
                     lampLight.enabled = !lampLight.enabled;
                 }
