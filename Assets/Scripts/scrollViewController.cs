@@ -23,6 +23,12 @@ namespace Assets.Scripts
             initScrollView();
         }
 
+        public void backBtnClicked()
+        {
+            LoadingSceneManager.LoadScene("SampleScene");
+            //SceneManager.LoadScene("SampleScene");
+        }
+
         // 호출 되면 데이터베이스에서 inventory 정보 들고오고 dictionary에 저장한다. 
         private void initScrollView()
         {

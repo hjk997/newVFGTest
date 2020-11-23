@@ -20,6 +20,7 @@ namespace Assets.Scripts
         {
             OBtnPublisher.Instance.onChange += DoSmt;
             shopHandler = shopScript.GetComponent<shopHandler>();
+
         }
 
         // Update is called once per frame

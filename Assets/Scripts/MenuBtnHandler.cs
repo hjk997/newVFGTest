@@ -6,6 +6,7 @@ namespace Assets.Scripts
     public class MenuBtnHandler : MonoBehaviour
     {
         public GameObject menuPanel;
+        public GameObject player;
 
         public void MenuBtnClicked()
         {
@@ -16,18 +17,26 @@ namespace Assets.Scripts
 
         public void InvenBtnClicked()
         {
-            menuPanel.SetActive(false);
+            Vector3 pos, rot;
+
+            pos = player.transform.position;
+            rot = player.transform.rotation.eulerAngles;
 
             // 플레이어의 마지막 위치 저장 
+            PlayerPrefs.SetFloat("xPosition", pos.x);
+            PlayerPrefs.SetFloat("yPosition", pos.y);
+            PlayerPrefs.SetFloat("zPosition", pos.z);
+
+            PlayerPrefs.SetFloat("xRotation", rot.x);
+            PlayerPrefs.SetFloat("yRotation", rot.y);
+            PlayerPrefs.SetFloat("zRotation", rot.z);
+
+
+
+            menuPanel.SetActive(false);
 
             LoadingSceneManager.LoadScene("InventoryScene");
             //SceneManager.LoadScene("InventoryScene");
-        }
-
-        public void backBtnClicked()
-        {
-            LoadingSceneManager.LoadScene("SampleScene");
-            //SceneManager.LoadScene("SampleScene");
         }
 
         public void exitBtnClicked()

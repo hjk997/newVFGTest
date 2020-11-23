@@ -99,6 +99,7 @@ namespace Assets.Scripts
                 tmp += 1;
             }
 
+            reader.Close();
             showSeedChangeBtnImage();
 
             harvestBgm = Resources.Load("Sound/harvest", typeof(AudioClip)) as AudioClip;
@@ -315,7 +316,12 @@ namespace Assets.Scripts
                         cropsInfoText[3].text = String.Format("성장까지 남은 일 수: {0}", reader.GetInt32(3));
                         cropsInfoText[4].text = String.Format("마지막으로 물을 준 날짜: {0}", reader.GetString(4));
 
-                        if (reader.GetInt32(5) == 0) // 물을 안 준 상태
+                        if (reader.GetString(0).Equals("mushroom"))
+                        {
+                            cropsInfoImage[2].sprite = Resources.Load<Sprite>("Image/nowater");
+                            cropsInfoText[5].text = "돌이킬 수 없어요.";
+                        }
+                        else if (reader.GetInt32(5) == 0) // 물을 안 준 상태
                         {
                             cropsInfoImage[2].sprite = Resources.Load<Sprite>("Image/nowater");
                             cropsInfoText[5].text = "아직 물을 안 줬어요!";
@@ -444,7 +450,6 @@ namespace Assets.Scripts
                         {
                             // 이름 값 가져오기 
                             string tagNameWaterCan = target.GetChild(0).name;
-
 
 
                             // 해당 농작물에 대한 IS_WATERED_TODAY 값을 1로 하고 오늘 날짜를 LAST_WATERED_DATE 값으로 한다. 

@@ -6,14 +6,16 @@ namespace Assets.Scripts
 {
     public class DateCheckCoroutine : MonoBehaviour
     {
+        public GameObject dateChangerObject;
+
         String preTime, nowTime;
 
         void OnEnable()
         {
             //InvokeRepeating("Func1", 0, 1.0f);
             // 현재 날짜 저장 
-            preTime = DateTime.Now.ToString("dd");
-
+            preTime = DateTime.Now.ToString("yyyy-MM-dd");
+           
             // 코루틴 호출 
             StartCoroutine(checkDateTime());
         }
@@ -22,7 +24,7 @@ namespace Assets.Scripts
         {
             // 1분 주기로 현재 날짜를 조회한다. 
             yield return new WaitForSeconds(60f);
-            nowTime = DateTime.Now.ToString("dd");
+            nowTime = DateTime.Now.ToString("yyyy-MM-dd");
 
             // 날짜 바뀜 
             if (!nowTime.Equals(preTime))
@@ -31,7 +33,7 @@ namespace Assets.Scripts
                 Time.timeScale = 0;
 
                 // 팝업창 띄워서 갱신 정보를 받도록 한다. 
-                DateChanger dateChanger = new DateChanger();
+                DateChanger dateChanger = dateChangerObject.GetComponent<DateChanger>();
 
                 dateChanger.showDateUpdatePanel();
 

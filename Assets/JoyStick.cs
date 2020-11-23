@@ -11,6 +11,21 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public float moveSpeed;
     public float rotateSpeed;
 
+    void Awake()
+    {
+        // 플레이어의 마지막 위치 설정
+        if (PlayerPrefs.HasKey("xPosition"))
+        {
+            player.localPosition = new Vector3(PlayerPrefs.GetFloat("xPosition"),
+            PlayerPrefs.GetFloat("yPosition"), PlayerPrefs.GetFloat("zPosition"));
+        }
+        if (PlayerPrefs.HasKey("xRotation"))
+        {
+            player.transform.rotation = Quaternion.Euler(PlayerPrefs.GetFloat("xRotation"),
+            PlayerPrefs.GetFloat("yRotation"), PlayerPrefs.GetFloat("zRotation"));
+        }
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;

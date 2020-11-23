@@ -1049,7 +1049,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401693409}
-  - component: {fileID: 1401693408}
   - component: {fileID: 1401693410}
   m_Layer: 0
   m_Name: ScriptTmp
@@ -1058,19 +1057,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1401693408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401693407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 249838554687ae64ab545ad8b6dab008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuPanel: {fileID: 0}
 --- !u!4 &1401693409
 Transform:
   m_ObjectHideFlags: 0
@@ -1310,7 +1296,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1401693408}
+      - m_Target: {fileID: 1401693410}
         m_MethodName: backBtnClicked
         m_Mode: 1
         m_Arguments:

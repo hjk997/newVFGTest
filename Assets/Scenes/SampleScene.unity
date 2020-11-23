@@ -4915,7 +4915,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 83, y: 60}
-  m_SizeDelta: {x: 600, y: 30}
+  m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583601688
 MonoBehaviour:
@@ -16894,6 +16894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuPanel: {fileID: 1123826427}
+  player: {fileID: 32864172}
 --- !u!114 &2002952084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16906,6 +16907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffb45e1e17053648a5ef7bbbf5e7eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dateChangerObject: {fileID: 2002952076}
 --- !u!114 &2002952085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16919,6 +16921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dateUpdatePanel: {fileID: 865195035}
+  SaveLogText: {fileID: 0}
 --- !u!4 &2003408773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011495609478, guid: 8dfbe94bc89610d489620aca436a33ae,
