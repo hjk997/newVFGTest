@@ -347,7 +347,7 @@ namespace Assets.Scripts
                         {
 
                             // Music : 도구 사용?
-
+                            AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/tool"));
                             // 무슨 씨앗 심는건지 가져오기 
                             //string sqlQuery = "SELECT CROP_NAME FROM CROPS WHERE NAME ='" + cropNameLocal + "';";
                             //dbCommand.CommandText = sqlQuery;
@@ -393,7 +393,8 @@ namespace Assets.Scripts
                     case 3: // 낫
 
                         // Music : 도구 사용 & 농작물 사용 
-
+                        AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/tool"));
+                        AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/harvest"));
                         // 보고 있는 밭에 농작물이 있고 수확이 가능하다면 농작물 수확
                         //Debug.Log(target.GetChild(0).name);
                         if (target.childCount == 1)
@@ -433,7 +434,7 @@ namespace Assets.Scripts
                     case 4: // 물뿌리개 
 
                         // Music : 도구 사용
-
+                        AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/tool"));
                         // 보고 있는 밭에 농작물이 있다면 물을 줌 
                         if (target.childCount == 1)
                         {

@@ -48,6 +48,7 @@ namespace Assets.Scripts
             if (isShopSelected)
             {
                 // Music : 시장 방문 
+                AudioManager.Inst.PlayOneShot(AudioManager.Inst.LoadClip("Sound/market"));
                 // shopHandler 부르기
                 shopHandler.showBuyPanel();
             }
